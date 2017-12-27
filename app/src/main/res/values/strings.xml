@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SCBC</string>
+    <string name="placeholder_title">This is the title.</string>
+    <string name="placeholder_body">This is the preview of the body.</string>
+    <string name="placeholder_time_since_posted">1 day ago</string>
+    <string name="time_since_posted"> %1$d day ago</string>
+
+    <string name="post_image">Post image</string>
+</resources>
