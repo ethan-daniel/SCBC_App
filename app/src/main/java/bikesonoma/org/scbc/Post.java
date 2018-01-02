@@ -4,25 +4,25 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
-public class Post{
+public class Post {
 
     //Properties of a post
-    private ImageView mImageView;
+    private Bitmap mBitmap;
     private String mTitle;
     private String mBodyPreview;
-    private int mDaysSincePosted;
+    private String mDateUploaded;
 
     public Post() {
-        mImageView = null;
+        mBitmap = null;
         mTitle = "";
         mBodyPreview = "";
     }
 
-    public Post(ImageView image, String title, String bodyPreview, int daysSince) {
-        mImageView = image;
+    public Post(Bitmap bmp, String title, String bodyPreview, String dateUploaded) {
+        mBitmap = bmp;
         mTitle = title;
         mBodyPreview = bodyPreview;
-        mDaysSincePosted = daysSince;
+        mDateUploaded = dateUploaded;
     }
 
     public String getTitle() {
@@ -33,12 +33,12 @@ public class Post{
         mTitle = str;
     }
 
-    public ImageView getImageView() {
-        return mImageView;
+    public Bitmap getBitmap() {
+        return mBitmap;
     }
 
-    public void setImageView(ImageView imageView) {
-        mImageView = imageView;
+    public void setBitmap(Bitmap bitmap) {
+        mBitmap = bitmap;
     }
 
     public String getBodyPreview() {
@@ -49,11 +49,7 @@ public class Post{
         mBodyPreview = str;
     }
 
-    public int getDaysSincePosted() {
-        return mDaysSincePosted;
-    }
+    public String getUploadDate() { return mDateUploaded; }
 
-    public void setDaysSincePosted(int days) {
-        mDaysSincePosted = days;
-    }
+    public void setUploadDate (String days) { mDateUploaded = days; }
 }
