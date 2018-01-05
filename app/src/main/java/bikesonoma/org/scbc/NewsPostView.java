@@ -1,5 +1,6 @@
 package bikesonoma.org.scbc;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+@SuppressLint("ViewConstructor")
 public class NewsPostView extends LinearLayout {
     private ImageView mImageView;
     private TextView mTitle;
@@ -30,7 +32,8 @@ public class NewsPostView extends LinearLayout {
 
         setPost(post);
     }
-//Set an existing post to one passed through the parameter
+
+    //Set an existing post to one passed through the parameter
     public void setPost(Post post) {
         mTitle.setText(post.getTitle());
         mBodyPreview.setText(post.getBodyPreview());

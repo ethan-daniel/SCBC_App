@@ -13,11 +13,12 @@ public class NewsPostListAdapter extends BaseAdapter {
     private Context mContext;
     private List<Post> mPostList;
 
-    public NewsPostListAdapter (Context context, List<Post> posts) {
-        mPostList = new ArrayList<Post>();
+    NewsPostListAdapter(Context context, List<Post> posts) {
+        mPostList = new ArrayList<>();
         mPostList = posts;
         mContext = context;
     }
+
     //Required methods for implementing BaseAdapter
     @Override
     public int getCount() {

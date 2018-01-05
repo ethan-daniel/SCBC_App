@@ -18,7 +18,7 @@ public class Post {
         mBodyPreview = "";
     }
 
-    public Post(Bitmap bmp, String title, String bodyPreview, String dateUploaded) {
+    Post(Bitmap bmp, String title, String bodyPreview, String dateUploaded) {
         mBitmap = bmp;
         mTitle = title;
         mBodyPreview = bodyPreview;
@@ -33,7 +33,7 @@ public class Post {
         mTitle = str;
     }
 
-    public Bitmap getBitmap() {
+    Bitmap getBitmap() {
         return mBitmap;
     }
 
@@ -41,7 +41,7 @@ public class Post {
         mBitmap = bitmap;
     }
 
-    public String getBodyPreview() {
+    String getBodyPreview() {
         return mBodyPreview;
     }
 
@@ -49,7 +49,11 @@ public class Post {
         mBodyPreview = str;
     }
 
-    public String getUploadDate() { return mDateUploaded; }
+    String getUploadDate() {
+        return mDateUploaded;
+    }
 
-    public void setUploadDate (String days) { mDateUploaded = days; }
+    public void setUploadDate(String days) {
+        mDateUploaded = days;
+    }
 }

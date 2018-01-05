@@ -5,8 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="bikesonoma.org.scbc.NewsActivity">
-    <ListView
+
+    <ProgressBar
+        android:id="@+id/progressBarNewsList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/list_posts"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/list_posts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </android.support.constraint.ConstraintLayout>
