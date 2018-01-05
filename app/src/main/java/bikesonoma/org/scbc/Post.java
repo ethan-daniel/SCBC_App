@@ -1,8 +1,6 @@
 package bikesonoma.org.scbc;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.widget.ImageView;
 
 public class Post {
 

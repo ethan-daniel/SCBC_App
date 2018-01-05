@@ -2,15 +2,10 @@ package bikesonoma.org.scbc;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Bitmap;
-import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 @SuppressLint("ViewConstructor")
 public class NewsPostView extends LinearLayout {
