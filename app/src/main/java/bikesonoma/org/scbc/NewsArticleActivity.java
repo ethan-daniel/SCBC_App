@@ -6,11 +6,13 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -26,7 +28,7 @@ import java.lang.ref.WeakReference;
 public class NewsArticleActivity extends AppCompatActivity {
 
     private ProgressBar mProgressBar;
-    private ImageLoader imageLoader;
+    ImageLoader imageLoader;
     private String fullBody;
 
     @Override

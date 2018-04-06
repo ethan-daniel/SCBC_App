@@ -1,27 +1,19 @@
 package bikesonoma.org.scbc;
 
+import android.support.v4.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.StrictMode;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GestureDetectorCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -35,9 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
-public class NewsActivity extends AppCompatActivity {
+public class NewsFragment extends Fragment {
 
     protected ArrayList<Post> mNewsPosts = new ArrayList<>();
     protected NewsPostListAdapter mAdapter;
@@ -57,14 +48,16 @@ public class NewsActivity extends AppCompatActivity {
     private static int numElements = 8;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news);
+    public NewsFragment() {
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_news, container, false);
         mNewsPosts = new ArrayList<>();
-        mAdapter = new NewsPostListAdapter(this, mNewsPosts);
-        mPostLayout = findViewById(R.id.list_posts);
+        mAdapter = new NewsPostListAdapter(getActivity(), mNewsPosts);
+        mPostLayout = rootView.findViewById(R.id.list_posts);
         mPostLayout.setAdapter(mAdapter);
 
         //Set onClickListener for the ListView of news articles
@@ -81,38 +74,40 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
         // Create global configuration and initialize ImageLoader with this config
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getActivity()).build();
         ImageLoader.getInstance().init(config);
         imageLoader = ImageLoader.getInstance();
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        new LoadNews(this).execute();
+        new LoadNews(this, rootView).execute();
+        return rootView;
     }
-
     private static class LoadNews extends AsyncTask<Void, Void, Void> {
 
-        private WeakReference<NewsActivity> activityReference;
+        private WeakReference<NewsFragment> activityReference;
+        private View baseView;
 
-        LoadNews(NewsActivity context) {
-            activityReference = new WeakReference<>(context);
+        LoadNews(NewsFragment fragment, View root) {
+            activityReference = new WeakReference<>(fragment);
+            baseView = root;
         }
         @Override
         protected void onPreExecute() {
         //Loading animation when app is scraping data from the website
             super.onPreExecute();
-            NewsActivity activity = activityReference.get();
-            if (activity == null) return;
-            activity.mProgressBar = activity.findViewById(R.id.progressBarNewsList);
-            activity.mProgressBar.setVisibility(View.VISIBLE);
+            NewsFragment fragment = activityReference.get();
+            if (fragment == null) return;
+            fragment.mProgressBar = baseView.findViewById(R.id.progressBarNewsList);
+            fragment.mProgressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
         protected void onPostExecute(Void result) {
-            NewsActivity activity = activityReference.get();
+            NewsFragment activity = activityReference.get();
             if (activity == null) return;
-            activity.mPostLayout = activity.findViewById(R.id.list_posts);
+            activity.mPostLayout = baseView.findViewById(R.id.list_posts);
 
             for (int i = 0; i < numElements; i++) {
                 InputStream inputStream = null;
@@ -132,7 +127,7 @@ public class NewsActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                NewsActivity activity = activityReference.get();
+                NewsFragment activity = activityReference.get();
                 // Connect to the web site
                 Document mBlogDocument = Jsoup.connect(activity.url).get();
                 //Creates a set of all images, headers, body previews, and upload dates, and links to full articles found in all article previews
